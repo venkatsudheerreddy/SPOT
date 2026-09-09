@@ -174,6 +174,11 @@ export default function App() {
   
   const handleLogout = async () => {
     await supabase.auth.signOut();
+    // Explicitly clear state in case onAuthStateChange doesn't fire (e.g. in preview/iframe)
+    setSession(null);
+    setUserRole("user");
+    setCurrentScreen("home");
+    window.history.replaceState({}, "", "/");
   };
 
   // Identify if we are on a main tab

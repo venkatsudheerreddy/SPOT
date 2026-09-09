@@ -7,6 +7,49 @@ import checkMailSvgPaths from "../imports/svg-mcvj28k4k";
 import taglinePaths from "../imports/svg-n3coxjrths";
 import spotLogo from "figma:asset/aa94aecb2134ca34a74296e5d0daa05734d1ae5a.png";
 
+// SSO provider config — add new providers here only
+type SSOProvider = {
+  id: "google" | "azure";
+  label: string;
+  icon: React.ReactNode;
+};
+
+const GoogleIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z" fill="#FFC107"/>
+    <path d="M6.306 14.691l6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 16.318 4 9.656 8.337 6.306 14.691z" fill="#FF3D00"/>
+    <path d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238A11.91 11.91 0 0 1 24 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z" fill="#4CAF50"/>
+    <path d="M43.611 20.083H42V20H24v8h11.303a12.04 12.04 0 0 1-4.087 5.571l.003-.002 6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z" fill="#1976D2"/>
+  </svg>
+);
+
+const MicrosoftIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="1" y="1" width="9" height="9" fill="#F25022"/>
+    <rect x="11" y="1" width="9" height="9" fill="#7FBA00"/>
+    <rect x="1" y="11" width="9" height="9" fill="#00A4EF"/>
+    <rect x="11" y="11" width="9" height="9" fill="#FFB900"/>
+  </svg>
+);
+
+const SSO_PROVIDERS: SSOProvider[] = [
+  { id: "google", label: "Continue with Google", icon: <GoogleIcon /> },
+  { id: "azure", label: "Continue with Microsoft", icon: <MicrosoftIcon /> },
+];
+
+async function signInWithSSO(
+  provider: SSOProvider["id"],
+): Promise<{ error: string | null }> {
+  const { error } = await supabase.auth.signInWithOAuth({
+    provider,
+    options: {
+      redirectTo: window.location.origin,
+    },
+  });
+  if (error) return { error: error.message };
+  return { error: null };
+}
+
 interface AuthScreenProps {
   onLoginSuccess: () => void;
   unconfirmedEmail?: string;
@@ -21,6 +64,7 @@ export function AuthScreen({ onLoginSuccess, unconfirmedEmail }: AuthScreenProps
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [ssoLoading, setSsoLoading] = useState<SSOProvider["id"] | null>(null);
 
   useEffect(() => {
     if (mode !== "login") return;
@@ -42,6 +86,17 @@ export function AuthScreen({ onLoginSuccess, unconfirmedEmail }: AuthScreenProps
     };
   }, [mode, onLoginSuccess]);
 
+
+  const handleSSOLogin = async (provider: SSOProvider["id"]) => {
+    setSsoLoading(provider);
+    setError(null);
+    const { error } = await signInWithSSO(provider);
+    if (error) {
+      setError(error);
+      setSsoLoading(null);
+    }
+    // On success Supabase redirects the browser; no further state needed.
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -262,6 +317,37 @@ export function AuthScreen({ onLoginSuccess, unconfirmedEmail }: AuthScreenProps
                 >
                   {mode === "login" ? "Sign up" : "Log in"}
                 </button>
+              </div>
+
+              {/* SSO Divider */}
+              <div className="flex items-center gap-3">
+                <div className="flex-1 h-px bg-border" />
+                <span className="text-muted-foreground text-[12px] font-medium tracking-wide shrink-0">OR</span>
+                <div className="flex-1 h-px bg-border" />
+              </div>
+
+              {/* SSO Buttons */}
+              <div className="flex flex-col gap-3">
+                {SSO_PROVIDERS.map((provider) => {
+                  const isProviderLoading = ssoLoading === provider.id;
+                  const isAnyLoading = ssoLoading !== null || loading;
+                  return (
+                    <button
+                      key={provider.id}
+                      type="button"
+                      disabled={isAnyLoading}
+                      onClick={() => handleSSOLogin(provider.id)}
+                      className="w-full h-[50px] rounded-[12px] border border-[#c49df8] bg-card text-foreground text-[15px] font-medium flex items-center justify-center gap-3 transition-all hover:border-primary hover:bg-[#f5f0fe] active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      {isProviderLoading ? (
+                        <Loader2 className="animate-spin w-5 h-5 text-primary" />
+                      ) : (
+                        <span className="shrink-0">{provider.icon}</span>
+                      )}
+                      <span>{provider.label}</span>
+                    </button>
+                  );
+                })}
               </div>
            </>
         )}
