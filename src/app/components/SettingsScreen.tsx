@@ -8,7 +8,13 @@ import { toast } from "sonner";
 import { projectId } from "../utils/supabase/info";
 import svgPaths from "../imports/svg-ok40tvmitm";
 import imgSeat1 from "figma:asset/06a2dbc140d3345ec3be709f68f7f30332113bf9.png";
-import imgSpot from "figma:asset/4433c75657723169ff9e363cc4087c0abc3ee0e6.png";
+// Inline SVG — SPOT brand mark for settings banner
+const SpotBrandSVG = () => (
+  <svg width="120" height="40" viewBox="0 0 120 40" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="SPOT">
+    <rect width="120" height="40" rx="10" fill="#9961f7"/>
+    <text x="60" y="27" textAnchor="middle" fontFamily="Poppins, system-ui, sans-serif" fontWeight="700" fontSize="22" letterSpacing="4" fill="white">SPOT</text>
+  </svg>
+);
 
 interface SettingsScreenProps {
   onBack?: () => void;
@@ -106,7 +112,7 @@ function IllustrationContent() {
           </div>
           <div className="h-[54px] relative shrink-0 w-[170px]" data-name="SPOT">
             <div className="absolute inset-0">
-               <img src={imgSpot} className="h-full w-full object-contain" alt="SPOT" />
+               <SpotBrandSVG />
             </div>
           </div>
           <FooterFrame />

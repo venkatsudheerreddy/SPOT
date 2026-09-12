@@ -1,11 +1,13 @@
 import { defineConfig, type Plugin } from 'vite'
 import path from 'path'
+import { existsSync } from 'fs'
 import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
 
 // Resolves Figma Make-specific module specifiers so the project builds
 // with standard Vite/npm outside of the Figma Make runtime.
-//   figma:asset/<hash>.png  → empty string (images degrade gracefully)
+//   figma:asset/<hash>.png  → /assets/<hash>.png if the file exists in public/assets/,
+//                             otherwise empty string (images degrade gracefully)
 //   figma:foundry-client-api → empty module stub
 function figmaCompatPlugin(): Plugin {
   const ASSET_RE = /^figma:asset\//
@@ -26,6 +28,12 @@ function figmaCompatPlugin(): Plugin {
         return 'export default {}'
       }
       if (ASSET_RE.test(original)) {
+        // e.g. "figma:asset/abc123.png" → filename = "abc123.png"
+        const filename = original.replace(ASSET_RE, '')
+        const publicPath = path.resolve(__dirname, 'public', 'assets', filename)
+        if (existsSync(publicPath)) {
+          return `export default "/assets/${filename}"`
+        }
         return 'export default ""'
       }
     },

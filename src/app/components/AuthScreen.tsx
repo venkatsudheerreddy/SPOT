@@ -5,7 +5,13 @@ import { projectId, publicAnonKey } from "../utils/supabase/info";
 import svgPaths from "../imports/svg-0ni18gzcjx";
 import checkMailSvgPaths from "../imports/svg-mcvj28k4k";
 import taglinePaths from "../imports/svg-n3coxjrths";
-import spotLogo from "figma:asset/aa94aecb2134ca34a74296e5d0daa05734d1ae5a.png";
+// Inline SVG logo — no external asset dependency
+const SpotLogoSVG = () => (
+  <svg width="120" height="40" viewBox="0 0 120 40" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="SPOT">
+    <rect width="120" height="40" rx="10" fill="#9961f7"/>
+    <text x="60" y="27" textAnchor="middle" fontFamily="Poppins, system-ui, sans-serif" fontWeight="700" fontSize="22" letterSpacing="4" fill="white">SPOT</text>
+  </svg>
+);
 
 // SSO provider config — add new providers here only
 type SSOProvider = {
@@ -152,7 +158,7 @@ export function AuthScreen({ onLoginSuccess, unconfirmedEmail }: AuthScreenProps
   const Logo = () => (
     <div className="flex flex-col gap-[16px] items-center w-[120px] mb-8" data-name="Logo">
       <div className="h-[56px] relative shrink-0 w-[120px]" data-name="SPOT">
-        <img src={spotLogo} alt="SPOT" className="w-full h-full object-contain" />
+        <SpotLogoSVG />
       </div>
       <div className="relative w-full h-[9px]" data-name="Tagline">
       </div>
