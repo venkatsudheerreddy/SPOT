@@ -1,21 +1,7 @@
 import { projectId, publicAnonKey } from './supabase/info';
 import { supabase } from './supabaseClient';
 
-// Fallback to project ID from supabaseClient URL if import is empty
-const getBaseUrl = () => {
-    let pid = projectId;
-    if (!pid) {
-        // Try to extract from supabaseUrl in supabaseClient if accessible, 
-        // or hardcode based on the known value "ixalugmtmxdgtdcwhpyc"
-        // Since we can't easily import supabaseUrl value if it's not exported as string literal in a way we can grab without execution...
-        // We will assume the import works, but if not, user needs to check info.tsx.
-        // However, looking at the previous read of supabaseClient.ts, the URL is "https://ixalugmtmxdgtdcwhpyc.supabase.co"
-        pid = "ixalugmtmxdgtdcwhpyc";
-    }
-    return `https://${pid}.supabase.co/functions/v1/make-server-a3a1e6bf`;
-}
-
-const BASE_URL = getBaseUrl();
+const BASE_URL = `https://${projectId}.supabase.co/functions/v1/make-server-a3a1e6bf`;
 
 async function getHeaders() {
   const { data: { session } } = await supabase.auth.getSession();
