@@ -1,15 +1,10 @@
 import React, { useEffect } from "react";
-
-// Inline SVG favicon as data URI — no external asset dependency
-const FAVICON_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <rect width="32" height="32" rx="6" fill="#9961f7"/>
-  <text x="16" y="22" text-anchor="middle" font-family="system-ui,sans-serif" font-weight="700" font-size="14" fill="white">S</text>
-</svg>`;
-const FAVICON_DATA_URI = `data:image/svg+xml,${encodeURIComponent(FAVICON_SVG)}`;
+import faviconIcon from "figma:asset/085b77912e73ee189edb681c8ccda5c8a9e601e3.png";
 
 export function FaviconHandler() {
   useEffect(() => {
     const setLink = (rel: string, href: string) => {
+      if (!href) return; // no-op when asset not resolved
       let link = document.querySelector(`link[rel*='${rel}']`) as HTMLLinkElement;
       if (!link) {
         link = document.createElement("link");
@@ -19,8 +14,8 @@ export function FaviconHandler() {
       link.href = href;
     };
 
-    setLink("icon", FAVICON_DATA_URI);
-    setLink("apple-touch-icon", FAVICON_DATA_URI);
+    setLink("icon", faviconIcon);
+    setLink("apple-touch-icon", faviconIcon);
   }, []);
 
   return null;
