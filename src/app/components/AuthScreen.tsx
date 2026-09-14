@@ -5,7 +5,7 @@ import { projectId, publicAnonKey } from "../utils/supabase/info";
 import svgPaths from "../imports/svg-0ni18gzcjx";
 import checkMailSvgPaths from "../imports/svg-mcvj28k4k";
 import taglinePaths from "../imports/svg-n3coxjrths";
-import spotLogo from "figma:asset/aa94aecb2134ca34a74296e5d0daa05734d1ae5a.png";
+const spotLogo = "/assets/spot_logo.png";
 
 // SSO provider config — add new providers here only
 type SSOProvider = {

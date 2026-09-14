@@ -7,8 +7,8 @@ import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { projectId } from "../utils/supabase/info";
 import svgPaths from "../imports/svg-ok40tvmitm";
-import imgSeat1 from "figma:asset/06a2dbc140d3345ec3be709f68f7f30332113bf9.png";
-import imgSpot from "figma:asset/4433c75657723169ff9e363cc4087c0abc3ee0e6.png";
+const imgSeat1 = "/assets/chair.png";
+const imgSpot = "/assets/spot_watermark.png";
 
 interface SettingsScreenProps {
   onBack?: () => void;

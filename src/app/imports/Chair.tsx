@@ -1,4 +1,4 @@
-import imgSeat from "figma:asset/06a2dbc140d3345ec3be709f68f7f30332113bf9.png";
+const imgSeat = "/assets/chair.png";
 
 export default function Chair() {
   return (

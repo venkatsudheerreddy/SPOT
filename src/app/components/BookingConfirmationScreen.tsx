@@ -1,6 +1,6 @@
 import React from "react";
 import svgPaths from "../imports/svg-j2h31idjtl";
-import imgSeat from "figma:asset/06a2dbc140d3345ec3be709f68f7f30332113bf9.png";
+const imgSeat = "/assets/chair.png";
 
 interface BookingConfirmationScreenProps {
   seatId: string;

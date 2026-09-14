@@ -1,5 +1,5 @@
 import svgPaths from "./svg-ok40tvmitm";
-import imgSeat1 from "figma:asset/06a2dbc140d3345ec3be709f68f7f30332113bf9.png";
+const imgSeat1 = "/assets/chair.png";
 
 function Empty() {
   return <div className="shrink-0 size-[40px]" data-name="empty" />;

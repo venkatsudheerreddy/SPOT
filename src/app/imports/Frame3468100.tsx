@@ -1,7 +1,7 @@
 import svgPaths from "./svg-cw1tqyy106";
-import imgZoshuaColahWq1QAraLg4Unsplash1 from "figma:asset/bae7bc4ab846f6f45c173e91a62a36a39cc2bd12.png";
-import imgSouthThali1 from "figma:asset/12edd84d59b3f86df0eed3b688f3618d8a2ddc27.png";
-import imgLike1 from "figma:asset/091b3ab0fe6ed83458d5130c7e2e35be4f245a76.png";
+const imgZoshuaColahWq1QAraLg4Unsplash1 = "";
+const imgSouthThali1 = "";
+const imgLike1 = "/assets/like.png";
 
 function Star() {
   return (

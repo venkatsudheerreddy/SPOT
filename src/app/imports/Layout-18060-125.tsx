@@ -1,5 +1,5 @@
 import svgPaths from "./svg-ni6hbju9md";
-import imgImage24 from "figma:asset/1502edcdb7ab1ef51afb82587977cdaff471f755.png";
+const imgImage24 = "";
 
 function Dismiss() {
   return (

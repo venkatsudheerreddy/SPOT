@@ -4,29 +4,21 @@ import { existsSync, mkdirSync, readdirSync, copyFileSync } from 'fs'
 import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
 
-// Resolves Figma Make-specific module specifiers so the project builds
-// with standard Vite/npm outside of the Figma Make runtime.
+// Copies image files from the repository's root assets/ directory into
+// public/assets/ before every build, so Vite serves them as static files at
+// /assets/<filename> in both dev and production (dist/assets/).
 //
-// figma:asset/<hash>.png resolution priority:
-//   1. root assets/<hash>.png  — Figma Make's native file location.
-//      At build-start, any files found there are copied into public/assets/
-//      so Vite serves them as static files at /assets/<filename>.
-//   2. public/assets/<hash>.png — static fallback already in public/
-//   3. empty string             — graceful degradation (broken img, no crash)
+// Root assets/ is Figma Make's native binary-file location; it is not served
+// by Vite automatically. Copying into public/ is the minimal change needed to
+// make all /assets/<filename> references work on Vercel and locally.
 //
-// figma:foundry-client-api → empty module stub
-function figmaCompatPlugin(): Plugin {
-  const ASSET_RE = /^figma:asset\//
-  const FOUNDRY_ID = 'figma:foundry-client-api'
-  const STUB_PREFIX = '\0figma:'
-
+// Handles figma:foundry-client-api (Figma Make internal module) with an empty
+// stub so the project continues to build outside the Figma Make runtime.
+function assetCopyPlugin(): Plugin {
   return {
-    name: 'vite-plugin-figma-compat',
+    name: 'vite-plugin-asset-copy',
     enforce: 'pre',
 
-    // Copy any files from root assets/ → public/assets/ before the build starts.
-    // Vite copies public/ into dist/ verbatim, so the images will be available
-    // at /assets/<filename> in both dev and production.
     buildStart() {
       const rootAssetsDir = path.resolve(__dirname, 'assets')
       const publicAssetsDir = path.resolve(__dirname, 'public', 'assets')
@@ -42,27 +34,25 @@ function figmaCompatPlugin(): Plugin {
       }
     },
 
+    // Stub out the Figma Make internal module so builds don't fail
+    // when running outside the Figma Make runtime.
     resolveId(id) {
-      if (id === FOUNDRY_ID || ASSET_RE.test(id)) {
-        return STUB_PREFIX + id
-      }
+      if (id === 'figma:foundry-client-api') return '\0figma:foundry-client-api'
     },
-
     load(id) {
-      if (!id.startsWith(STUB_PREFIX)) return
-      const original = id.slice(STUB_PREFIX.length)
+      if (id === '\0figma:foundry-client-api') return 'export default {}'
+    },
+  }
+}
 
-      if (original === FOUNDRY_ID) return 'export default {}'
 
-      if (ASSET_RE.test(original)) {
-        const filename = original.replace(ASSET_RE, '') // e.g. "abc123.png"
-        // Check public/assets/ (includes files copied from root assets/ above)
-        const publicPath = path.resolve(__dirname, 'public', 'assets', filename)
-        if (existsSync(publicPath)) {
-          return `export default "/assets/${filename}"`
-        }
-        // No file found — degrade gracefully
-        return 'export default ""'
+function figmaAssetResolver() {
+  return {
+    name: 'figma-asset-resolver',
+    resolveId(id) {
+      if (id.startsWith('figma:asset/')) {
+        const filename = id.replace('figma:asset/', '')
+        return path.resolve(__dirname, 'src/assets', filename)
       }
     },
   }
@@ -70,7 +60,8 @@ function figmaCompatPlugin(): Plugin {
 
 export default defineConfig({
   plugins: [
-    figmaCompatPlugin(),
+    figmaAssetResolver(),
+    assetCopyPlugin(),
     react(),
     tailwindcss(),
   ],

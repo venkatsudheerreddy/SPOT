@@ -1,6 +1,6 @@
 import svgPaths from "./svg-4v1q92yg7v";
-import imgZoshuaColahWq1QAraLg4Unsplash1 from "figma:asset/bae7bc4ab846f6f45c173e91a62a36a39cc2bd12.png";
-import imgSouthThali1 from "figma:asset/12edd84d59b3f86df0eed3b688f3618d8a2ddc27.png";
+const imgZoshuaColahWq1QAraLg4Unsplash1 = "";
+const imgSouthThali1 = "";
 
 function FoodTitle() {
   return (

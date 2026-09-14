@@ -1,6 +1,6 @@
 import svgPaths from "./svg-1f9yup5ix3";
-import imgZoshuaColahWq1QAraLg4Unsplash1 from "figma:asset/bae7bc4ab846f6f45c173e91a62a36a39cc2bd12.png";
-import imgFireflyFunnyIllustratedSignboardThatSaysDesignerAtWorkBrightYellowCautionStyle8006381 from "figma:asset/eb3e0e58abcab60afce7c5119827d708ebbb9410.png";
+const imgZoshuaColahWq1QAraLg4Unsplash1 = "";
+const imgFireflyFunnyIllustratedSignboardThatSaysDesignerAtWorkBrightYellowCautionStyle8006381 = "";
 
 function Title() {
   return (

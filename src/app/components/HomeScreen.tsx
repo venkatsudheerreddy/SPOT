@@ -4,7 +4,7 @@ import { supabase } from "../utils/supabaseClient";
 import { projectId } from "../utils/supabase/info";
 import { greetingsData } from "../data/greetings";
 import svgPaths from "../imports/svg-fndyfiw26t";
-import exampleImage from 'figma:asset/8462c762fa3e385203348308e4b9edb6a069ca55.png';
+const exampleImage = "/assets/chair.png";
 
 import { AdminReservationCard } from "./AdminReservationCard";
 

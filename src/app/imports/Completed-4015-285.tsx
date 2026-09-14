@@ -1,5 +1,5 @@
 import svgPaths from "./svg-oqo2bht5vg";
-import imgBgImage from "figma:asset/656dc4fd45dcd1f6d703702e73869f800e48101b.png";
+const imgBgImage = "";
 
 function Frame3() {
   return (

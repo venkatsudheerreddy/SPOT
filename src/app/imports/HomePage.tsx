@@ -1,6 +1,6 @@
 import svgPaths from "./svg-i9u7fk38f8";
-import imgImage13 from "figma:asset/899d6b031132ea9dfe87f9e31aa24b5007910889.png";
-import imgDivider from "figma:asset/587c2cde7becbdf6dc626dad506f1c552b99ef1e.png";
+const imgImage13 = "";
+const imgDivider = "/assets/divider.png";
 
 function Header() {
   return (

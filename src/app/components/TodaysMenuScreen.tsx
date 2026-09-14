@@ -2,7 +2,7 @@ import React, { useEffect, useState, useMemo } from "react";
 import Slider from "react-slick";
 import { supabase } from "../utils/supabaseClient";
 import { Loader2, Star } from "lucide-react";
-import imgNoLunch from "figma:asset/413c2e906aa84a0ef4cc1a0213c143a63c237dce.png";
+const imgNoLunch = "/assets/cafeteria_empty.png";
 import { motion, AnimatePresence } from "motion/react";
 import { CommentsScreen, AddCommentScreen } from "./CommentsScreen";
 import { api } from "../utils/api";

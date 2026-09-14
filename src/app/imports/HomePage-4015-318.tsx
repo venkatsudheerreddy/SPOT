@@ -1,5 +1,5 @@
 import svgPaths from "./svg-r09arf1kgk";
-import imgDivider from "figma:asset/587c2cde7becbdf6dc626dad506f1c552b99ef1e.png";
+const imgDivider = "/assets/divider.png";
 
 function Header() {
   return (

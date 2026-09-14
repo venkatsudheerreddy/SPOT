@@ -1,5 +1,5 @@
 import svgPaths from "./svg-l4lfs10to2";
-import imgUntitled12 from "figma:asset/413c2e906aa84a0ef4cc1a0213c143a63c237dce.png";
+const imgUntitled12 = "/assets/cafeteria_empty.png";
 
 function Frame() {
   return (

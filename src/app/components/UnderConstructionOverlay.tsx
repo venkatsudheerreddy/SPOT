@@ -1,5 +1,5 @@
 import React from "react";
-import imgUc1 from "figma:asset/67509c3cbc0fdfa65b4cafa8f16939e0c8f95bbd.png";
+const imgUc1 = "";
 
 function Button({ onClick }: { onClick: () => void }) {
   return (

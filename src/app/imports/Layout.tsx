@@ -1,6 +1,6 @@
 import svgPaths from "./svg-sa3u1j72be";
-import imgImage13 from "figma:asset/899d6b031132ea9dfe87f9e31aa24b5007910889.png";
-import imgRectangle1 from "figma:asset/6c41ab0632868a05b0e3b1afb2c77e5468da5a82.png";
+const imgImage13 = "";
+const imgRectangle1 = "/assets/divider.png";
 
 function Frame() {
   return (

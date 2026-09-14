@@ -4,7 +4,7 @@ import { supabase } from "../utils/supabaseClient";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
 import { HomeSVGs } from "./icons/HomeIcons";
 import svgPaths from "../imports/svg-nhr51sy8dy";
-import exampleImage from 'figma:asset/8462c762fa3e385203348308e4b9edb6a069ca55.png';
+const exampleImage = "/assets/chair.png";
 
 interface MyBookingsScreenProps {
   onBack: () => void;

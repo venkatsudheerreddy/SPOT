@@ -1,4 +1,4 @@
-import imgImage20 from "figma:asset/4ad27594459c8dfed9ca1849ebbd0828e525288d.png";
+const imgImage20 = "";
 
 function Frame() {
   return (

@@ -1,4 +1,4 @@
-import imgSouthThali1 from "figma:asset/12edd84d59b3f86df0eed3b688f3618d8a2ddc27.png";
+const imgSouthThali1 = "";
 
 function Image() {
   return (

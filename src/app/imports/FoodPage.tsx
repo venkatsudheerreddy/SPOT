@@ -1,5 +1,5 @@
 import svgPaths from "./svg-oxvc0jminh";
-import imgZoshuaColahWq1QAraLg4Unsplash1 from "figma:asset/bae7bc4ab846f6f45c173e91a62a36a39cc2bd12.png";
+const imgZoshuaColahWq1QAraLg4Unsplash1 = "";
 
 function Close() {
   return (

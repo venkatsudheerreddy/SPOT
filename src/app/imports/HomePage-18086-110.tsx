@@ -1,5 +1,5 @@
 import svgPaths from "./svg-37zvgxe2tc";
-import imgScreenshot202512241857261 from "figma:asset/af700183e94412f95f72c748041227a37301793c.png";
+const imgScreenshot202512241857261 = "";
 
 function Logo() {
   return (

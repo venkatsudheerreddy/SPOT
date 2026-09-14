@@ -1,5 +1,5 @@
 import React from 'react';
-import desktopBg from "figma:asset/de83359ec51e60aaed2091197f99ea3e21be0f9d.png";
+const desktopBg = "/assets/desktop_bg.png";
 
 interface DesktopLayoutProps {
   currentScreen: string;

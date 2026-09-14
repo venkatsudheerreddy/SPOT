@@ -1,6 +1,6 @@
 import svgPaths from "./svg-eye75tv964";
-import imgUntitled12 from "figma:asset/413c2e906aa84a0ef4cc1a0213c143a63c237dce.png";
-import imgUc1 from "figma:asset/67509c3cbc0fdfa65b4cafa8f16939e0c8f95bbd.png";
+const imgUntitled12 = "/assets/cafeteria_empty.png";
+const imgUc1 = "";
 
 function Title() {
   return (
