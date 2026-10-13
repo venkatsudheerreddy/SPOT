@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-const faviconIcon = "/assets/favicon.png";
+const faviconIcon = "/assets/favicon.png?v=2";
 
 export function FaviconHandler() {
   useEffect(() => {
